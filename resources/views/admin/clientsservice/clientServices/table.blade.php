@@ -2,30 +2,36 @@
 <table class="table table-striped table-bordered" id="clientServices-table" width="100%">
     <thead>
      <tr>
-        <th>User Id</th>
-        <th>Service Id</th>
-        <th>Payment Mode</th>
-        <th>Duration</th>
-        <th>Status</th>
-        <th>Created By</th>
-        <th>Updated By</th>
-        <th>Deleted By</th>
+        <th>#</th>
+        <th>Order #</th>
         <th>Domain</th>
+        <th>Duration</th>
+        <th>Date</th>
+        <th>Client Name</th>
+        <th>Status</th>
         <th >Action</th>
      </tr>
     </thead>
     <tbody>
     @foreach($clientServices as $clientService)
         <tr>
-            <td>{!! $clientService->user_id !!}</td>
+            <td>{!! $loop->iteration !!}</td>
             <td>{!! $clientService->service_id !!}</td>
-            <td>{!! $clientService->payment_mode !!}</td>
-            <td>{!! $clientService->duration !!}</td>
-            <td>{!! $clientService->status !!}</td>
-            <td>{!! $clientService->created_by !!}</td>
-            <td>{!! $clientService->updated_by !!}</td>
-            <td>{!! $clientService->deleted_by !!}</td>
             <td>{!! $clientService->domain !!}</td>
+            <td>{!! $clientService->duration !!} Year</td>
+            <td>{!! $clientService->created_at !!}</td>
+            <td>
+            <?php 
+              $client_name = DB::table('users')->where('id', $clientService->user_id)->first();
+              print($client_name->first_name .' '. $client_name->last_name );
+            ?>
+            </td>
+            <td>
+            <?php 
+              $order_status = DB::table('OrderStatuss')->where('id', $clientService->status)->first();
+              print($order_status->name);
+            ?>
+            </td>
             <td>
                  <a href="{{ route('admin.clientsservice.clientServices.show', collect($clientService)->first() ) }}">
                      <i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view clientService"></i>

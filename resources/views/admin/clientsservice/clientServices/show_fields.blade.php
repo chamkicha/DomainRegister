@@ -73,8 +73,8 @@
                                     ?>
                                     
                                     <td class="td_text_align">Invoice #</td>
-                                    <td class="table_allign"><a href="{{ route('admin.orderInvoice.orderInvoices.show', collect($OrderInvoices->id)->first() ) }}">
-                                    {{$OrderInvoices->invoice_no}}</a></td>
+                                    <td class="table_allign"><a href="{{ route('admin.orderInvoice.orderInvoices.show', collect($OrderInvoices->id ?? '')->first() ) }}">
+                                    {{$OrderInvoices->invoice_no ?? ''}}</a></td>
                                 </tr>
                                 <tr>
                                     <td class="td_text_align">Status</td>

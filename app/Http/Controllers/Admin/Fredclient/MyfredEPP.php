@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Fredclient;
-
+use DOMDocument;
 use DB;
 
 class MyfredEPP {
-
+ 
 	/**
 	* Variable used for internal storage of objects and data
 	* @var array
@@ -44,13 +44,13 @@ class MyfredEPP {
 
 		// Set DOM modes and output format
 		$this->document->standalone = false;
-		$this->document->formatOutput = FORMAT_OUTPUT;
+		$this->document->formatOutput = config('constants.FORMAT_OUTPUT');
 
 		// Create $this->epp and fill it with default attributes
 		$this->epp = $this->document->appendChild($this->document->createElement('epp'));
-		$this->epp->appendChild($this->setAttribute('xmlns', XMLNS_EPP));
-		$this->epp->appendChild($this->setAttribute('xmlns:xsi', XMLNS_XSCHEMA));
-		$this->epp->appendChild($this->setAttribute('xsi:schemaLocation', XSCHEMA_EPP));
+		$this->epp->appendChild($this->setAttribute('xmlns', config('constants.XMLNS_EPP')));
+		$this->epp->appendChild($this->setAttribute('xmlns:xsi', config('constants.XMLNS_XSCHEMA')));
+		$this->epp->appendChild($this->setAttribute('xsi:schemaLocation', config('constants.XSCHEMA_EPP')));
 
 		// Append <epp/> to the document
 		$this->document->appendChild($this->epp);
@@ -445,7 +445,7 @@ class MyfredEPP {
 	* @return boolean
 	*/
 	public function _logframe($xml) {
-		if(constant('EPP_LOG') !== false && constant('EPP_LOG_FILE')) {
+		if(config('constant.EPP_LOG') !== false && config('constant.EPP_LOG_FILE')) {
 			return file_put_contents(EPP_LOG_FILE, gzcompress($xml) . pack('L', 0xFEE1DEAD), FILE_APPEND);
             return file_put_contents(EPP_LOG_FILE,$xml, FILE_APPEND);
 		}
