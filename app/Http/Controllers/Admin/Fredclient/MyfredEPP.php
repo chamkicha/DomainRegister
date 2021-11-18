@@ -965,5 +965,11 @@ public function creditInfo() {
 		$command = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">\r\n  <command>\r\n    <update>\r\n      <domain:update xmlns:domain=\"http://www.nic.cz/xml/epp/domain-1.4\" xsi:schemaLocation=\"http://www.nic.cz/xml/epp/domain-1.4 domain-1.4.xsd\">\r\n        <domain:name>" . $domain . "</domain:name>\r\n        <domain:chg>\r\n          <domain:nsset>" . $newnsset . "</domain:nsset>\r\n        </domain:chg>\r\n      </domain:update>\r\n    </update>\r\n    <clTRID>" . $this->clTRID() . "</clTRID>\r\n  </command>\r\n</epp>";
 		return $command;
 	}
+	
+	public function domainList() {
+		$command = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\r\n <epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">\r\n <extension>\r\n <fred:extcommand xmlns:fred=\"http://www.nic.cz/xml/epp/fred-1.5\" xsi:schemaLocation=\"http://www.nic.cz/xml/epp/fred-1.5 fred-1.5.0.xsd\">\r\n <fred:getResults/>\r\n  <fred:clTRID>" . $this->clTRID() . "</fred:clTRID>\r\n  </fred:extcommand> \r\n</extension>\r\n </epp>";
+
+		return $command;
+	}
 
 }

@@ -163,7 +163,7 @@ class FredClientController extends InfyOmBaseController
        }
 
        public function epplogin($client_id){
-           $login = $this->myfredEPP->eppHello();
+           $login = $this->myfredEPP->domainList();
            dd($login);
        }
 
